@@ -9,19 +9,29 @@ export function TimelineGrid({
   birthDate,
   totalWeeks = 4160,
 }: TimelineGridProps) {
-  // 4160 weeks = 80 years
+  // Calculate current week number from birth date
+  const today = new Date();
+  const diffTime = Math.abs(today.getTime() - birthDate.getTime());
+  const currentWeek = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+
   const weeks = Array.from({ length: totalWeeks }, (_, index) => ({
     weekNumber: index,
-    isCurrentWeek: false, // We'll implement this later
+    isCurrentWeek: index === currentWeek,
+    isPast: index < currentWeek,
     hasEvent: false, // We'll implement this later
   }));
 
   return (
-    <div className='grid grid-cols-52 gap-1'>
+    <div className='flex flex-wrap gap-0.5 w-fit'>
       {weeks.map(week => (
         <div
           key={week.weekNumber}
-          className='aspect-square bg-gray-200 hover:bg-gray-300 transition-colors rounded-sm'
+          className={`
+            w-4 h-4 transition-colors rounded-sm
+            ${week.isCurrentWeek ? 'bg-blue-500' : ''}
+            ${week.isPast ? 'bg-gray-300' : 'bg-gray-200'}
+            hover:bg-gray-300
+          `}
           title={`Week ${week.weekNumber}`}
         />
       ))}

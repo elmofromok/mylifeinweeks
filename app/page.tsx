@@ -1,4 +1,5 @@
 import { TimelineGrid } from './components/timeline/grid';
+import { lifeEvents } from './data/events';
 
 export default function HomePage() {
   const birthDate = new Date('1971-06-24'); // Example date, we'll make this configurable later
@@ -13,7 +14,7 @@ export default function HomePage() {
           </p>
         </header>
 
-        <TimelineGrid birthDate={birthDate} />
+        <TimelineGrid birthDate={birthDate} events={lifeEvents} />
       </div>
     </main>
   );

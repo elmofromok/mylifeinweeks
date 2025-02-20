@@ -30,44 +30,50 @@ export function TimelineGrid({
             {/* Year marker */}
             <div
               key={`year-marker-${year}`}
-              className='flex-auto min-h-8 px-4 py-2 bg-blue-900 rounded-sm'
+              className='flex-auto min-h-8 px-4 py-2 rounded-sm bg-bg-year'
             >
-              <div className='text-xs text-gray-200'>{year}</div>
+              <div className='text-xs text-text-light'>{year}</div>
             </div>
 
-            {/* Weeks of this year */}
+            {/* Weeks */}
             {Array.from({ length: 52 }, (_, weekIndex) => {
               const absoluteWeekNumber = yearStartWeek + weekIndex;
               const event = events.find(
                 e => e.weekNumber === absoluteWeekNumber,
               );
 
+              const getWeekClasses = () => {
+                const baseClasses =
+                  'flex-auto min-h-8 px-4 py-2 relative transition-colors rounded-sm text-xs';
+
+                if (absoluteWeekNumber === currentWeek) {
+                  return `${baseClasses} bg-primary text-text-light`;
+                }
+
+                if (event) {
+                  return `${baseClasses} bg-event-${
+                    event.category || 'personal'
+                  } text-text-light`;
+                }
+
+                return `${baseClasses} ${
+                  absoluteWeekNumber < currentWeek
+                    ? 'bg-bg-past text-text-dark'
+                    : 'bg-bg-future text-text-dark'
+                }`;
+              };
+
               return (
                 <div
                   key={`week-${year}-${weekIndex + 1}`}
-                  className={`flex-auto min-h-8 px-4 py-2
-                    relative transition-colors rounded-sm text-xs
-                    ${
-                      absoluteWeekNumber === currentWeek
-                        ? 'bg-blue-500 text-white'
-                        : ''
-                    }
-                    ${
-                      event
-                        ? 'bg-green-500 text-white'
-                        : absoluteWeekNumber < currentWeek
-                        ? 'bg-gray-300 text-gray-700'
-                        : 'bg-gray-200 text-gray-700'
-                    }
-                    hover:bg-gray-300
-                  `}
+                  className={getWeekClasses()}
                   title={
                     event
                       ? `${event.title} (${year})`
                       : `Week ${weekIndex + 1} of ${year}`
                   }
                 >
-                  {weekIndex + 1}
+                  {event ? event.shortText : weekIndex + 1}
                 </div>
               );
             })}

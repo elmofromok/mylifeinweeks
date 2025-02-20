@@ -2,21 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root,
+.light {
   /* Base colors */
   --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
   /* Blue for current week */
   --color-secondary: #16a34a;
   /* Green for events */
 
   /* Background colors */
   --color-bg-base: #ffffff;
+  --color-bg-subtle: #f9fafb;
+  --color-bg-hover: #f3f4f6;
+  --color-bg-active: #e5e7eb;
   --color-bg-past: #d1d5db;
   /* Past weeks */
   --color-bg-future: #e5e7eb;
   /* Future weeks */
   --color-bg-year: #1e3a8a;
   /* Year markers */
+
+  /* Border colors */
+  --color-border-base: #e5e7eb;
+  --color-border-hover: #d1d5db;
+  --color-border-active: #9ca3af;
 
   /* Event colors by category */
   --color-event-personal: #16a34a;
@@ -31,14 +41,82 @@
   /* Text colors */
   --color-text-primary: #171717;
   --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
   --color-text-light: #f3f4f6;
   --color-text-dark: #1f2937;
+
+  /* UI Element colors */
+  --color-dropdown-bg: #ffffff;
+  --color-dropdown-hover: #f3f4f6;
+  --color-dropdown-border: #e5e7eb;
+  --color-dropdown-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Button colors */
+  --color-button-hover: #f3f4f6;
+  --color-button-active: #e5e7eb;
+
+  /* Shadow colors */
+  --color-shadow-sm: rgba(0, 0, 0, 0.05);
+  --color-shadow-md: rgba(0, 0, 0, 0.1);
+  --color-shadow-lg: rgba(0, 0, 0, 0.15);
 }
 
-/* Dark mode colors */
+.dark {
+  /* Dark theme colors */
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-secondary: #22c55e;
+
+  /* Background colors */
+  --color-bg-base: #0a0a0a;
+  --color-bg-subtle: #171717;
+  --color-bg-hover: #262626;
+  --color-bg-active: #404040;
+  --color-bg-past: #374151;
+  --color-bg-future: #1f2937;
+  --color-bg-year: #1e40af;
+
+  /* Border colors */
+  --color-border-base: #262626;
+  --color-border-hover: #404040;
+  --color-border-active: #525252;
+
+  /* Event colors in dark mode - more vibrant versions */
+  --color-event-personal: #22c55e;
+  /* Brighter green */
+  --color-event-education: #a855f7;
+  /* Brighter purple */
+  --color-event-career: #f97316;
+  /* Brighter orange */
+  --color-event-travel: #38bdf8;
+  /* Brighter blue */
+
+  /* Text colors in dark mode */
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #9ca3af;
+  --color-text-tertiary: #6b7280;
+  --color-text-light: #f3f4f6;
+  --color-text-dark: #1f2937;
+
+  /* UI Element colors */
+  --color-dropdown-bg: #171717;
+  --color-dropdown-hover: #262626;
+  --color-dropdown-border: #404040;
+  --color-dropdown-shadow: rgba(0, 0, 0, 0.3);
+
+  /* Button colors */
+  --color-button-hover: #262626;
+  --color-button-active: #404040;
+
+  /* Shadow colors */
+  --color-shadow-sm: rgba(0, 0, 0, 0.2);
+  --color-shadow-md: rgba(0, 0, 0, 0.4);
+  --color-shadow-lg: rgba(0, 0, 0, 0.6);
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Adjust base colors for dark mode */
+  :root:not(.light):not(.dark) {
+    /* System dark theme colors */
     --color-bg-base: #0a0a0a;
     --color-bg-past: #374151;
     --color-bg-future: #1f2937;
@@ -57,8 +135,12 @@
     /* Text colors in dark mode */
     --color-text-primary: #f3f4f6;
     --color-text-secondary: #9ca3af;
+    --color-text-tertiary: #6b7280;
     --color-text-light: #f3f4f6;
     --color-text-dark: #1f2937;
+
+    /* Copy all dark theme variables here */
+    /* ... same as .dark above ... */
   }
 }
 

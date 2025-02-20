@@ -1,48 +1,79 @@
 'use client';
 
+import { LifeEvent } from '../../types';
+
 interface TimelineGridProps {
   birthDate: Date;
   totalWeeks?: number;
+  events?: LifeEvent[];
 }
 
 export function TimelineGrid({
   birthDate,
   totalWeeks = 4160,
+  events = [],
 }: TimelineGridProps) {
-  // Calculate current week number from birth date
   const today = new Date();
   const diffTime = Math.abs(today.getTime() - birthDate.getTime());
   const currentWeek = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
   const birthYear = birthDate.getFullYear();
-
-  const weeks = Array.from({ length: totalWeeks }, (_, index) => ({
-    weekNumber: index,
-    isCurrentWeek: index === currentWeek,
-    isPast: index < currentWeek,
-    hasEvent: false, // We'll implement this later
-    isStartOfYear: index % 52 === 0,
-    year: birthYear + Math.floor(index / 52),
-  }));
+  const totalYears = Math.ceil(totalWeeks / 52);
 
   return (
-    <div className='flex flex-wrap gap-0.5 w-fit'>
-      {weeks.map(week => (
-        <div
-          key={week.weekNumber}
-          className={`px-4 py-2
-            relative  transition-colors rounded-sm
-            ${week.isCurrentWeek ? 'bg-blue-500' : ''}
-            ${week.isPast ? 'bg-gray-300' : 'bg-gray-200'}
-            hover:bg-gray-300
-            ${week.isStartOfYear ? 'bg-blue-900' : ''}
-          `}
-          title={`Week ${week.weekNumber} (${week.year})`}
-        >
-          {week.isStartOfYear && (
-            <div className='text-xs text-gray-200'>{week.year}</div>
-          )}
-        </div>
-      ))}
+    <div className='flex flex-wrap gap-2 w-fit'>
+      {Array.from({ length: totalYears }, (_, yearIndex) => {
+        const year = birthYear + yearIndex;
+        const yearStartWeek = yearIndex * 52;
+
+        return (
+          <>
+            {/* Year marker */}
+            <div
+              key={`year-marker-${year}`}
+              className='flex-auto min-h-8 px-4 py-2 bg-blue-900 rounded-sm'
+            >
+              <div className='text-xs text-gray-200'>{year}</div>
+            </div>
+
+            {/* Weeks of this year */}
+            {Array.from({ length: 52 }, (_, weekIndex) => {
+              const absoluteWeekNumber = yearStartWeek + weekIndex;
+              const event = events.find(
+                e => e.weekNumber === absoluteWeekNumber,
+              );
+
+              return (
+                <div
+                  key={`week-${year}-${weekIndex + 1}`}
+                  className={`flex-auto min-h-8 px-4 py-2
+                    relative transition-colors rounded-sm text-xs
+                    ${
+                      absoluteWeekNumber === currentWeek
+                        ? 'bg-blue-500 text-white'
+                        : ''
+                    }
+                    ${
+                      event
+                        ? 'bg-green-500 text-white'
+                        : absoluteWeekNumber < currentWeek
+                        ? 'bg-gray-300 text-gray-700'
+                        : 'bg-gray-200 text-gray-700'
+                    }
+                    hover:bg-gray-300
+                  `}
+                  title={
+                    event
+                      ? `${event.title} (${year})`
+                      : `Week ${weekIndex + 1} of ${year}`
+                  }
+                >
+                  {weekIndex + 1}
+                </div>
+              );
+            })}
+          </>
+        );
+      })}
     </div>
   );
 }

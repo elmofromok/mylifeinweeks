@@ -40,10 +40,11 @@ A personal biography web app that visually represents your life in weekly segmen
 
 ## 🌟 **Nice-to-Have Enhancements**
 
-- 🖼️ Add images for key events.
-- 🌗 Dark mode toggle.
-- 📜 Scrollable timeline with animations.
-- 🏙️ Group events by "chapters" of life (e.g., Education, Career, Travels).
+- 🖼️ Add images for key events
+- 🌗 Dark mode toggle ✓
+- 📜 Scrollable timeline with animations
+- 🏙️ Group events by "chapters" of life (e.g., Education, Career, Travels)
+- 🌡️ Add temperature data visualization for each week based on location
 
 ---
 
@@ -61,47 +62,58 @@ A personal biography web app that visually represents your life in weekly segmen
 
 ### 📦 **Phase 1: Project Setup**
 
-- [ ] Set up Next.js with TypeScript
-- [ ] Install Tailwind CSS
-- [ ] Define folder structure (`components/`, `data/`, `pages/`)
+- [x] Set up Next.js with TypeScript
+- [x] Install Tailwind CSS
+- [x] Define folder structure (`components/`, `data/`, `pages/`)
 
 ---
 
 ### 🧩 **Phase 2: Core Components**
 
 1. **TimelineGrid Component**
+   - [x] Render the weekly grid based on age
+   - [x] Highlight weeks with life events
+   - [x] Add year markers
+   - [ ] Add event tooltips/details
 
-   - Render the weekly grid based on age.
-   - Highlight weeks with life events.
-
-2. **EventModal Component**
-
-   - Modal popup displaying details of the selected event.
+2. **Theme Toggle Component**
+   - [x] Create theme context
+   - [x] Add light/dark mode toggle
+   - [x] Add system theme detection
 
 3. **BiographyHeader Component**
-   - Static header with name, date of birth, and short bio.
+   - [ ] Static header with name
+   - [ ] Add date of birth display
+   - [ ] Add short bio section
 
 ---
 
 ### 🎨 **Phase 3: UI/UX Enhancements**
 
-- [ ] Style timeline grid with dynamic colors.
-- [ ] Smooth animations when selecting weeks.
-- [ ] Responsive adjustments for mobile.
+- [x] Style timeline grid with dynamic colors
+- [x] Add dark mode support
+- [ ] Add smooth animations when selecting weeks
+- [ ] Add responsive adjustments for mobile
+- [ ] Add hover effects for grid items
 
 ---
 
 ### 💾 **Phase 4: Data Integration**
 
-- [ ] Create a static JSON file with life events.
-- [ ] Dynamically load and render events from JSON.
+- [x] Create event data structure
+- [x] Add birthday event generation
+- [ ] Add location-based temperature data
+- [ ] Add support for images in events
+- [ ] Add event categories and filtering
 
 ---
 
 ### 🚀 **Phase 5: Deployment**
 
 - [ ] Deploy app to Vercel
-- [ ] Optimize performance and accessibility
+- [ ] Add SEO metadata
+- [ ] Optimize performance
+- [ ] Add accessibility improvements
 
 ---
 

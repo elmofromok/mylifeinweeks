@@ -2,10 +2,10 @@
 
 You are an expert full-stack developer proficient in TypeScript, React, Next.js, and modern UI/UX frameworks (e.g., Tailwind CSS, Shadcn UI, Radix UI). Your task is to produce the most optimized and maintainable Next.js code, following best practices and adhering to the principles of clean code and robust architecture.
 
-### Objective
+## Objective
 - Create a Next.js solution that is not only functional but also adheres to the best practices in performance, security, and maintainability.
 
-### Code Style and Structure
+## Code Style and Structure
 
 - Write concise, technical TypeScript code with accurate examples.
 - Use functional and declarative programming patterns; avoid classes.
@@ -81,17 +81,53 @@ You are an expert full-stack developer proficient in TypeScript, React, Next.js,
 - Constants: SCREAMING_SNAKE_CASE
 
 ## File Organization
-- Components go in app/components/
-- Types in app/types/
-- Data files in app/data/
-- Utilities in app/utils/
+
+### Directory Structure
+```
+app/
+├── __tests__/          # Test files mirroring component structure
+├── components/         # React components
+│   ├── timeline/       # Timeline-related components
+│   └── shared/        # Reusable components
+├── context/           # React Context providers
+├── data/             # Data files and utilities
+│   ├── static/       # Static JSON/data files
+│   └── api/          # API-related functions
+├── types/            # TypeScript type definitions
+├── utils/            # Utility functions
+│   ├── date/         # Date manipulation
+│   └── format/       # Formatting helpers
+├── styles/           # Global styles
+└── lib/              # Third-party integrations
+```
+
+### File Naming
+- Test files: `ComponentName.test.tsx`
+- Context files: `nameContext.tsx`
+- Type files: `name.types.ts`
+- Utility files: `nameUtil.ts`
+
+### File Co-location
+- Keep related files close:
+  ```
+  components/timeline/
+  ├── TimelineGrid.tsx
+  ├── TimelineGrid.test.tsx
+  ├── TimelineGrid.types.ts
+  └── index.ts         # Barrel exports
+  ```
+
+### Module Boundaries
+- Use barrel exports (index.ts) for public APIs
+- Keep implementation details private
+- Group related components together
 
 ## State Management
 - Use React hooks for local state
 - Context for theme and other global state
 - No Redux or other external state management
 
-### UI and Styling
+## UI and Styling
 - Use modern UI frameworks (e.g., Tailwind CSS, Shadcn UI, Radix UI) for styling. These may be added in the future.
 - Follow design system color variables
 - Implement consistent design and responsive patterns across platforms.
@@ -104,11 +140,11 @@ You are an expert full-stack developer proficient in TypeScript, React, Next.js,
   - Spacing (use Tailwind's spacing scale)
   - Typography (use Tailwind's text utilities)
 
-### Security and Performance
+## Security and Performance
 - Implement proper error handling, user input validation, and secure coding practices.
 - Follow performance optimization techniques, such as reducing load times and improving rendering efficiency.
 
-### Documentation Hierarchy
+## Documentation Hierarchy
 
 1. **Planning Phase** (`<PLANNING>` tags)
    - Used during initial component design
@@ -141,7 +177,7 @@ You are an expert full-stack developer proficient in TypeScript, React, Next.js,
     */
    ```
 
-### Methodology
+## Methodology
 
 1. **System 2 Thinking**: Approach the problem with analytical rigor. Break down the requirements into smaller, manageable parts and thoroughly consider each step before implementation.
 2. **Tree of Thoughts**: Evaluate multiple possible solutions and their consequences. Use a structured approach to explore different paths and select the optimal one.
@@ -155,57 +191,31 @@ You are an expert full-stack developer proficient in TypeScript, React, Next.js,
 4. **Review and Optimize**: Perform a review of the code, looking for areas of potential optimization and improvement.
 5. **Finalization**: Finalize the code by ensuring it meets all requirements, is secure, and is performant.
 
-### Testing
+## Testing
 
-1. **Unit Testing**
-   - Use Jest and React Testing Library
-   - Test components in isolation
+1. **Component Testing**
+   - Use React Testing Library for behavior testing
    - Focus on user interactions and accessibility
-   - Mock external dependencies and context providers
+   - Test dynamic features explicitly
 
-2. **Test Structure**
+2. **Snapshot Testing**
+   - Limited to stable, presentational components only
+   - Avoid snapshotting components with:
+     - Dynamic data (dates, calculations)
+     - Theme-dependent rendering
+     - Context-dependent states
+   - Instead, test specific output values:
    ```typescript
-   describe('ComponentName', () => {
-     it('should render successfully', () => {
-       // Basic render test
-     });
-
-     it('should handle user interactions', () => {
-       // Interaction tests
-     });
-
-     it('should match snapshot', () => {
-       // Snapshot test if needed
-     });
-   });
+   expect(getWeekNumber(date)).toBe(expectedWeek);
+   expect(screen.getByText('Week 1')).toBeInTheDocument();
    ```
 
-3. **Testing Priorities**
-   - Critical user paths first
-   - Event handlers and state changes
-   - Edge cases and error states
-   - Accessibility features
-   - Theme switching functionality
+3. **Integration Testing**
+   - Test component interactions
+   - Verify data flow
+   - Test theme changes explicitly
 
-4. **Mocking Guidelines**
-   - Mock external API calls
-   - Provide test data through fixtures
-   - Use MSW for API mocking
-   - Mock context values when needed
-
-5. **Coverage Goals**
-   - Aim for meaningful coverage over percentage
-   - Focus on business-critical paths
-   - Test error boundaries and fallbacks
-   - Include accessibility testing
-
-6. **Integration Testing**
-   - Test component integration points
-   - Verify data flow between components
-   - Test theme context integration
-   - Validate event handling across components
-
-### Examples
+## Examples
 
 **Component Documentation Example:**
 
@@ -220,6 +230,7 @@ export function TimelineGrid({ ... })
 ```
 
 **Planning Example:**
+```
 <PLANNING>
 Component: TimelineGrid
 Purpose: Display life timeline in weekly segments
@@ -254,3 +265,4 @@ Performance Considerations:
 - Memoization of week calculations
 - Optimized re-renders
 </PLANNING>
+```

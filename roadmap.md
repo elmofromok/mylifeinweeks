@@ -1,4 +1,4 @@
-Got it—**a biographical timeline of your life, displayed week by week.** No planning, tracking, or goal-setting—just a **visual story of your life events** in a cool, engaging format.
+
 
 ### 💡 **App Summary**
 
@@ -34,7 +34,7 @@ A personal biography web app that visually represents your life in weekly segmen
    - Minimalist profile header (e.g., name, birthdate).
 
 4. **Responsive Design:**
-   - Mobile-friendly and visually appealing across devices.
+   - Mobile-friendly and visually appealing across devices.After the modifications to the rules.md file, please go over them again and look for conflicting rules or contradictions. Understand that this is not reflected in the current code and only intended for work going forward.
 
 ---
 
@@ -102,7 +102,6 @@ A personal biography web app that visually represents your life in weekly segmen
 
 - [x] Create event data structure
 - [x] Add birthday event generation
-- [ ] Add location-based temperature data
 - [ ] Add support for images in events
 - [ ] Add event categories and filtering
 

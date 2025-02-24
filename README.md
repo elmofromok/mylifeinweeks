@@ -1,7 +1,10 @@
-
 # Life in Weeks
 
 A visual representation of your life, where each box represents one week. This app helps you visualize your life's journey through a unique timeline format, highlighting significant events and milestones.
+
+## Development
+
+For detailed architecture, design decisions, and development roadmap, see our [Planning Document](PLANNING.md).
 
 ## Features
 
